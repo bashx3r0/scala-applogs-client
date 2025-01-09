@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"fmt"
 
 	internalRedis "github.com/bashx3r0/scala-applogs-client/internal/redis"
 	"github.com/go-redis/redis/v8"
@@ -64,6 +65,11 @@ func ensureLogDirectory() {
 
 // Initialize logger and Redis client
 func InitApplogs() {
+
+	fmt.Println("Initializing applogs...")
+
+	fmt.Println("Loading environment variables...")
+
 	_ = godotenv.Load(".env")
 	ensureLogDirectory()
 
@@ -72,6 +78,8 @@ func InitApplogs() {
 	facilityID = os.Getenv("FACILITY_ID")
 	instanceType = os.Getenv("INSTANCE_TYPE")
 	redisAddr = os.Getenv("APPLG_CORE_REDIS")
+
+	fmt.Println(serviceName, instanceID, facilityID, instanceType, redisAddr)
 
 	// Load fallback resync time (default: 30 seconds)
 	fallbackResyncTime = getEnvAsInt("FALLBACK_RESYNC_TIME", 30)
@@ -100,6 +108,7 @@ func InitApplogs() {
 	rdb = internalRedis.NewRedisClient(redisAddr)
 
 	if rdb != nil {
+		logger.Info("Checking Redis connection")
 		checkRedisConnection()
 	} else {
 		logger.Error("Failed to initialize Redis client. Redis client is nil.")
