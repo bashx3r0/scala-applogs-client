@@ -23,7 +23,7 @@ type Applogs struct {
 
 // NewLogger initializes the logger and sets up the log queue
 func NewLogger(queueSize int) *Applogs {
-	fmt.Println("Initializing applogs....")
+
 	logger.InitApplogs()
 	applogs := &Applogs{
 		logQueue: make(chan logEntry, queueSize), // Buffered log queue
@@ -47,7 +47,7 @@ func (a *Applogs) logAsync(level, message string, fields map[string]interface{})
 	entry := logEntry{level: level, message: message, fields: fields}
 	select {
 	case a.logQueue <- entry:
-		// Log successfully added to the queue
+		fmt.Println("Log successfully added to the queue")
 	default:
 		// Log queue is full; optionally drop the log or handle the overflow
 		logger.Logger().Warn("Log queue is full, dropping log", zap.String("level", level), zap.String("message", message))
