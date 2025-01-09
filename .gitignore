@@ -18,7 +18,6 @@ vendor/
 
 # Go Cache
 *.test
-*.mod
 *.sum
 
 # IDE Configs
