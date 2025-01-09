@@ -143,7 +143,7 @@ func checkRedisConnection() {
 
 	_, err := rdb.(*redis.Client).Ping(ctx).Result()
 	if err != nil {
-		logger.Error("Failed to connect to Redis",
+		logger.Error("Failed to connect to Redis Database",
 			zap.String("address", redisAddr),
 			zap.Error(err))
 	} else {
