@@ -23,7 +23,7 @@ type Applogs struct {
 
 // NewLogger initializes the logger and sets up the log queue
 func NewLogger(queueSize int) *Applogs {
-	fmt.Println("Initializing applogs...")
+	fmt.Println("Initializing applogs....")
 	logger.InitApplogs()
 	applogs := &Applogs{
 		logQueue: make(chan logEntry, queueSize), // Buffered log queue
