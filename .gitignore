@@ -1,0 +1,26 @@
+# Binaries
+bin/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Logs
+logs/
+*.log
+
+# Test Output
+test-coverage/
+*.out
+
+# Vendor Directory
+vendor/
+
+# Go Cache
+*.test
+*.mod
+*.sum
+
+# IDE Configs
+.idea/
+.vscode/
